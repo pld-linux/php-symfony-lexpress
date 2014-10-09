@@ -21,8 +21,6 @@ Requires:	php(ctype)
 Requires:	php-pear-Archive_Tar
 Requires:	php-pear-Log
 Requires:	php-pear-PEAR-core
-Provides:	php-symfony
-Obsoletes:	php-symfony
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
