@@ -1,19 +1,19 @@
 # TODO
 # - use system creole, propel, phing packages (or better do not do that to avoid incompatibilities?)
 # - php deps autofinder finds a lot of crap (that's why we use manual R now), maybe there is a way to improve
-%define		pkgname	symfony
-%define		php_min_version	5.2.4
+%define		pkgname	symfony-lexpress
+%define		php_min_version	5.3.4
 #include	/usr/lib/rpm/macros.php
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
-Version:	1.4.20
+Version:	1.5.3
 Release:	1
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
-Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	3c3640ffbab023a1a8f78e0cbb554c10
-URL:		http://www.symfony-project.org/
+Source0:	https://github.com/LExpress/symfony1/archive/v%{version}.tar.gz
+# Source0-md5:	e8b0f52bd71c07933c12f3319166fcbd
+URL:		https://github.com/LExpress/symfony1
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
 Requires:	php(core) >= %{php_min_version}
@@ -21,6 +21,8 @@ Requires:	php(ctype)
 Requires:	php-pear-Archive_Tar
 Requires:	php-pear-Log
 Requires:	php-pear-PEAR-core
+Provides:	php-symfony
+Obsoletes:	php-symfony
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -34,6 +36,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautoreq	%{?_noautophp} %{?_noautopear}
 
 %description
+This is fork of Symfony 1.4.
+
 Based on the best practices of web development, thoroughly tried on
 several active websites, symfony aims to speed up the creation and
 maintenance of web applications, and to replace the repetitive coding
@@ -51,6 +55,8 @@ such as:
 - enterprise ready
 
 %description -l pl.UTF-8
+To jest alternatywna wersja Symfony 1.4.
+
 Oparty na najlepszych praktykach tworzenia aplikacji WWW, gruntownie
 wypróbowany na kilku aktywnych serwisach moduł symfony próbuje
 przyspieszyć tworzenie i utrzymywanie aplikacji WWW oraz zastąpić
@@ -68,7 +74,7 @@ takich jak:
 - gotowość na zastosowania enterprise
 
 %prep
-%setup  -q -n %{pkgname}-%{version}
+%setup  -q -n symfony1-%{version}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -82,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc licenses CHANGELOG COPYRIGHT LICENSE README
+%doc licenses CHANGELOG.md COPYRIGHT.md LICENSE.md README.md UPGRADE.md WHATS_NEW.md
 %attr(755,root,root) %{_bindir}/*
 %dir %{php_data_dir}/%{pkgname}
 %dir %{php_data_dir}/%{pkgname}/data
