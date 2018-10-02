@@ -7,14 +7,14 @@
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
-Version:	1.5.3
+Version:	1.5.10
 Release:	1
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
 Source0:	https://github.com/LExpress/symfony1/archive/v%{version}.tar.gz
-# Source0-md5:	e8b0f52bd71c07933c12f3319166fcbd
-URL:		https://github.com/LExpress/symfony1
-BuildRequires:	rpmbuild(macros) >= 1.461
+# Source0-md5:	a864bb61f8b9ac78514297d3d36f9016
+URL:		https://github.com/LExpress/symfony1/
+BuildRequires:	rpmbuild(macros) >= 1.654
 Requires:	Smarty
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(ctype)
@@ -24,14 +24,7 @@ Requires:	php-pear-PEAR-core
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# bad depsolver
-%define		_noautopear	pear(Doctrine/.* pear(PHPUnit/.*) pear(PHPUnit2/.*) pear(phing/.*) pear(propel/.*) pear(simpletest/.*)
-
-# exclude optional php dependencies
-%define		_noautophp	%{nil}
-
-# put it together for rpmbuild
-%define		_noautoreq	%{?_noautophp} %{?_noautopear}
+%define		_noautoreq_pear Doctrine/.* PHPUnit/.* PHPUnit2/.* phing/.* propel/.* simpletest/.*
 
 %description
 This is fork of Symfony 1.4.
@@ -52,9 +45,9 @@ such as:
 - Ajax support
 - enterprise ready
 
-%description -l pl.UTF-8
-To jest alternatywna wersja Symfony 1.4.
+This is LExpress fork of no longer maintained official symfony 1.
 
+%description -l pl.UTF-8
 Oparty na najlepszych praktykach tworzenia aplikacji WWW, gruntownie
 wypróbowany na kilku aktywnych serwisach moduł symfony próbuje
 przyspieszyć tworzenie i utrzymywanie aplikacji WWW oraz zastąpić
@@ -70,6 +63,8 @@ takich jak:
 - rozdzielenie modelu obiektowego i MVC
 - obsługa AJAX
 - gotowość na zastosowania enterprise
+
+To jest fork autorstwa LExpress oprogramowania symfony 1.
 
 %prep
 %setup  -q -n symfony1-%{version}
